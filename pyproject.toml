@@ -1,0 +1,35 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "numerical-methods-practicals"
+version = "0.1.0"
+description = "Reproducible solutions to three practical sheets in numerical methods"
+readme = "README.md"
+requires-python = ">=3.11"
+license = {file = "LICENSE"}
+authors = [{name = "Nuno Antunes"}]
+dependencies = ["numpy>=1.26,<3", "matplotlib>=3.8,<4"]
+
+[project.optional-dependencies]
+dev = ["nbformat>=5.10", "pytest>=8", "ruff>=0.9"]
+
+[project.scripts]
+numerical-lab = "numerical_methods.cli:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/numerical_methods"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
+exclude = ["notebooks"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP", "RUF"]
+
+[tool.ruff.lint.per-file-ignores]
+"scripts/build_notebooks.py" = ["E501"]
